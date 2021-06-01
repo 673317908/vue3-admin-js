@@ -83,6 +83,7 @@ export default {
   font-family: "黑体";
   font-weight: 700;
   color: #aeaeae;
+  text-align: center;
 }
 .current {
   color: #333333 !important;

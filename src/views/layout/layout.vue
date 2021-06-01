@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import Aside from "./Aside";
+import Aside from "./aside/Aside";
 import Heade from "./Header";
 import Main from "./Main";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";

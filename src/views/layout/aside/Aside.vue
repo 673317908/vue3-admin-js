@@ -10,27 +10,34 @@
       <template v-for="item in routers">
         <!-- 无子菜单 -->
         <template v-if="!item.children">
-          <router-link :to="item.path">
-            <a-menu-item v-if="item.meta.hidden" :key="item.path">
-              <span>{{ item.meta && item.meta.title }}</span>
+          <router-link :to="item.path" :key="item.path">
+            <a-menu-item v-if="item.meta.hidden">
+              <span>{{
+                $t(`aside_menu.${item.meta && item.meta.language}`)
+              }}</span>
             </a-menu-item>
           </router-link>
         </template>
         <!-- 有子菜单 -->
-        <a-sub-menu v-else :key="item.path">
+        <Menu v-else :routerList="item.children" />
+        <!-- <a-sub-menu>
           <template #title>
             <span
-              ><MailOutlined /><span>{{ item.meta && item.meta.title }}</span></span
+              ><MailOutlined /><span>{{
+                $t(`aside_menu.${item.meta && item.meta.language}`)
+              }}</span></span
             >
           </template>
           <template v-if="item.children.length">
             <template v-for="chil in item.children" :key="chil.path">
               <router-link :to="chil.path">
-                <a-menu-item>{{ chil.meta && chil.meta.title }}</a-menu-item>
+                <a-menu-item>{{
+                  $t(`aside_menu.${chil.meta && chil.meta.language}`)
+                }}</a-menu-item>
               </router-link>
             </template>
           </template>
-        </a-sub-menu>
+        </a-sub-menu> -->
       </template>
     </a-menu>
   </div>
@@ -48,6 +55,7 @@ import {
 } from "@ant-design/icons-vue";
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import Menu from "./component/menu";
 export default {
   components: {
     MenuFoldOutlined,
@@ -57,6 +65,7 @@ export default {
     DesktopOutlined,
     InboxOutlined,
     AppstoreOutlined,
+    Menu,
   },
   setup() {
     const { options } = useRouter();
