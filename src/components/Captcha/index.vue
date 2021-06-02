@@ -7,19 +7,23 @@
 <script>
 import "./captcha";
 import { onMounted } from "vue";
+import { useI18n } from "vue-i18n";
 export default {
   name: "captcha",
   setup() {
+    const { locale } = useI18n();
     onMounted(() => {
-      var nc_token = ["FFFF0N00000000009AF1", new Date().getTime(), Math.random()].join(
-        ":"
-      );
+      var nc_token = [
+        "FFFF0N00000000009AF1",
+        new Date().getTime(),
+        Math.random(),
+      ].join(":");
       var NC_Opt = {
         renderTo: "#captcha_dom",
         appkey: "FFFF0N00000000009AF1",
         scene: "nc_login",
         token: nc_token,
-        customWidth: 300,
+        customWidth: 365,
         trans: { key1: "code0" },
         elementID: ["usernameID"],
         is_Opt: 0,
@@ -45,12 +49,22 @@ export default {
       };
       var nc = new noCaptcha(NC_Opt);
       nc.upLang("cn", {
-        _startTEXT: "请按住滑块，拖动到最右边",
-        _yesTEXT: "验证通过",
-        _error300: '哎呀，出错了，点击<a href="javascript:__nc.reset()">刷新</a>再来一次',
-        _errorNetwork: '网络不给力，请<a href="javascript:__nc.reset()">点击刷新</a>',
+        _startTEXT:
+          locale.value == "ch"
+            ? "请按住滑块，拖动到最右边"
+            : "Slide to the far right",
+        _yesTEXT: locale.value == "ch" ? "验证通过" : "Verification by",
+        _error300:
+          locale.value == "ch"
+            ? '哎呀，出错了，点击<a href="javascript:__nc.reset()">刷新</a>再来一次'
+            : 'Error,click the<a href="javascript:__nc.reset()">refresh</a>try again',
+        _errorNetwork:
+          locale.value == "ch"
+            ? '网络不给力，请<a href="javascript:__nc.reset()">Click the refresh</a>'
+            : 'The network is not good，Please<a href="javascript:__nc.reset()">Click the refresh</a>',
       });
     });
+    return {};
   },
 };
 </script>
@@ -60,7 +74,7 @@ export default {
   margin: 20px 0 !important;
 }
 .nc-container #nc_1_wrapper {
-  width: auto !important;
+  // width: auto !important;
 }
 .nc-container .nc_scale span {
   height: auto !important;

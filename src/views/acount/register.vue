@@ -10,22 +10,33 @@
         v-bind="layout"
       >
         <a-form-item required name="username">
-          <label>用户名</label>
-          <a-input v-model:value="register_form.username" type="text" />
+          <label>{{ $t("account.user_name") }}</label>
+          <a-input
+            v-model:value="register_form.username"
+            :placeholder="$t('account.user_name_placeholder')"
+            type="text"
+          />
         </a-form-item>
         <a-form-item required name="password">
-          <label>密码</label>
-          <a-input v-model:value="register_form.password" type="password" />
+          <label>{{ $t("account.password") }}</label>
+          <a-input
+            v-model:value="register_form.password"
+            type="password"
+            :placeholder="$t('account.password_placeholder')"
+          />
         </a-form-item>
         <a-form-item required name="passwords">
-          <label>确认密码</label>
+          <label>{{ $t("account.confirm_password") }}</label>
           <a-input v-model:value="register_form.passwords" type="password" />
         </a-form-item>
         <a-form-item required name="code">
-          <label>验证码</label>
+          <label>{{ $t("account.verification_code") }}</label>
           <a-row :gutter="16">
             <a-col :span="12">
-              <a-input v-model:value="register_form.code" maxlength="6"
+              <a-input
+                v-model:value="register_form.code"
+                maxlength="6"
+                :placeholder="$t('account.verification_code_placeholder')"
             /></a-col>
             <a-col :span="12">
               <a-button
@@ -44,13 +55,19 @@
           <Captcha />
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" html-type="submit" block>注册</a-button>
+          <a-button type="primary" html-type="submit" block>{{
+            $t("account.register")
+          }}</a-button>
         </a-form-item>
       </a-form>
       <div class="fs_12" style="margin: 20px 0">
-        <router-link to="/forget" class="color_white">忘记密码</router-link>
+        <router-link to="/forget" class="color_white">{{
+          $t("account.forget")
+        }}</router-link>
         <span style="margin: 0 10px" class="color_white">|</span>
-        <router-link to="/login" class="color_white">登录</router-link>
+        <router-link to="/login" class="color_white">{{
+          $t("account.login")
+        }}</router-link>
       </div>
     </div>
   </div>
@@ -59,7 +76,11 @@
 <script>
 import { reactive, onMounted, toRefs } from "vue";
 import Captcha from "../../components/Captcha/index";
-import { ValidateUserName, ValidatePassword, ValidateCode } from "../../utils/check";
+import {
+  ValidateUserName,
+  ValidatePassword,
+  ValidateCode,
+} from "../../utils/check";
 import { message } from "ant-design-vue";
 export default {
   components: {

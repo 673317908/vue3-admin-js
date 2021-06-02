@@ -19,25 +19,9 @@
           </router-link>
         </template>
         <!-- 有子菜单 -->
-        <Menu v-else :routerList="item.children" />
-        <!-- <a-sub-menu>
-          <template #title>
-            <span
-              ><MailOutlined /><span>{{
-                $t(`aside_menu.${item.meta && item.meta.language}`)
-              }}</span></span
-            >
-          </template>
-          <template v-if="item.children.length">
-            <template v-for="chil in item.children" :key="chil.path">
-              <router-link :to="chil.path">
-                <a-menu-item>{{
-                  $t(`aside_menu.${chil.meta && chil.meta.language}`)
-                }}</a-menu-item>
-              </router-link>
-            </template>
-          </template>
-        </a-sub-menu> -->
+        <template v-else>
+          <Menu :routerItem="item" :key="item.path" />
+        </template>
       </template>
     </a-menu>
   </div>

@@ -8,37 +8,62 @@
         :rules="rulesForm"
         @finish="handleFinish"
         v-bind="layout"
+        labelAlign="left"
       >
-        <a-form-item required name="username">
-          <label>用户名</label>
-          <a-input v-model:value="register_form.username" type="text" />
+        <a-form-item required name="username" :label="$t('account.user_name')">
+          <a-input
+            v-model:value="register_form.username"
+            type="text"
+            :placeholder="$t('account.user_name_placeholder')"
+          />
         </a-form-item>
-        <a-form-item required name="password">
-          <label>密码</label>
-          <a-input v-model:value="register_form.password" type="password" />
+        <a-form-item required name="password" :label="$t('account.password')">
+          <a-input
+            v-model:value="register_form.password"
+            type="password"
+            :placeholder="$t('account.password_placeholder')"
+          />
         </a-form-item>
-        <a-form-item required name="code">
-          <label>验证码</label>
+        <a-form-item
+          required
+          name="code"
+          :label="$t('account.verification_code')"
+        >
           <a-row :gutter="16">
             <a-col :span="12">
-              <a-input v-model:value="register_form.code" maxlength="6"
+              <a-input
+                v-model:value="register_form.code"
+                maxlength="6"
+                :placeholder="$t('account.verification_code_placeholder')"
             /></a-col>
             <a-col :span="12">
-              <a-button type="danger" block>获取验证码</a-button>
+              <a-button type="danger" block>{{
+                $t("account.get_code")
+              }}</a-button>
             </a-col>
           </a-row>
         </a-form-item>
+        <!-- <a-form-item> -->
+        <Captcha />
+        <!-- </a-form-item> -->
         <a-form-item>
-          <Captcha />
-        </a-form-item>
-        <a-form-item>
-          <a-button type="primary" html-type="submit" block>登录</a-button>
+          <a-button
+            style="margin-left: 25%"
+            type="primary"
+            html-type="submit"
+            block
+            >{{ $t("account.login") }}</a-button
+          >
         </a-form-item>
       </a-form>
-      <div class="fs_12" style="margin: 20px 0">
-        <router-link to="/forget" class="color_white">忘记密码</router-link>
-        <span style="margin: 0 10px" class="color_white">|</span>
-        <router-link to="/register" class="color_white">注册</router-link>
+      <div class="fs_12" style="margin: 20px 0;color: #eee;">
+        <router-link to="/forget" class="color_gray">{{
+          $t("account.forget")
+        }}</router-link>
+        <span style="margin: 0 10px" class="color_gray">|</span>
+        <router-link to="/register" class="color_gray">{{
+          $t("account.register")
+        }}</router-link>
       </div>
     </div>
   </div>
@@ -47,7 +72,11 @@
 <script>
 import { reactive, onMounted, toRefs } from "vue";
 import Captcha from "../../components/Captcha/index";
-import { ValidateUserName, ValidatePassword, ValidateCode } from "../../utils/check";
+import {
+  ValidateUserName,
+  ValidatePassword,
+  ValidateCode,
+} from "../../utils/check";
 export default {
   components: {
     Captcha,
@@ -82,7 +111,7 @@ export default {
     };
     const layoutConfig = reactive({
       layout: {
-        labelCol: { span: 4 },
+        labelCol: { span: 5 },
         wrapperCol: { span: 14 },
       },
       register_form: {
