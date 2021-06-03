@@ -19,9 +19,10 @@
             @click="() => (collapsed = !collapsed)"
           />
         </a-layout-header>
+        <Breadcrumb />
         <a-layout-content
           :style="{
-            margin: '24px 16px',
+            margin: '0 16px 24px',
             padding: '24px',
             background: '#fff',
             minHeight: '280px',
@@ -35,11 +36,12 @@
 </template>
 
 <script>
-import Aside from "./Aside";
+import Aside from "./aside/Aside";
 import Heade from "./Header";
 import Main from "./Main";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
 import { reactive, toRefs } from "vue";
+import Breadcrumb from "../../components/breadcrumb/index";
 export default {
   name: "layout",
   components: {
@@ -48,6 +50,7 @@ export default {
     Main,
     MenuUnfoldOutlined,
     MenuFoldOutlined,
+    Breadcrumb,
   },
   setup() {
     const LayoutData = reactive({

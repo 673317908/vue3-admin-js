@@ -4,7 +4,7 @@ import {
 } from 'vue-i18n';
 
 const i18n = createI18n({
-    locale: "ch",
+    locale: "en",
     messages: {
         ch: require("./china"),
         en: require("./english")
