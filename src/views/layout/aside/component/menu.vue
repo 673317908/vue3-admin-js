@@ -1,25 +1,27 @@
 <template>
   <div>
-    <a-sub-menu>
-      <template #title>
-        <component :is="routerItem.meta.icon" />
-        <span
-          ><span>{{
+    <a-menu mode="inline" theme="dark">
+      <a-sub-menu>
+        <template #title>
+          <component :is="routerItem.meta.icon" />
+          <span class="anticon">{{
             $t(`aside_menu.${routerItem.meta && routerItem.meta.language}`)
-          }}</span></span
-        >
-      </template>
-      <template v-if="routerItem.children.length">
-        <template v-for="chil in routerItem.children" :key="chil.path">
-          <a-menu-item v-if="!chil.children" :key="chil.path">
-            <router-link :to="chil.path">
-              {{ $t(`aside_menu.${chil.meta && chil.meta.language}`) }}
-            </router-link>
-          </a-menu-item>
-          <Menu v-else :routerItem="chil" :key="chil.path" />
+          }}</span>
         </template>
-      </template>
-    </a-sub-menu>
+        <template v-if="routerItem.children.length">
+          <template v-for="chil in routerItem.children" :key="chil.path">
+            <a-menu-item v-if="!chil.children" :key="chil.path">
+              <router-link :to="chil.path">
+                <span>{{
+                  $t(`aside_menu.${chil.meta && chil.meta.language}`)
+                }}</span>
+              </router-link>
+            </a-menu-item>
+            <Menu v-else :routerItem="chil" :key="chil.path" />
+          </template>
+        </template>
+      </a-sub-menu>
+    </a-menu>
   </div>
 </template>
 
@@ -30,6 +32,7 @@ import {
   ContainerOutlined,
   CodeSandboxOutlined,
   UserOutlined,
+  AppstoreOutlined,
 } from "@ant-design/icons-vue";
 export default {
   name: "Menu",
@@ -38,6 +41,7 @@ export default {
     ContainerOutlined,
     CodeSandboxOutlined,
     UserOutlined,
+    AppstoreOutlined,
   },
   props: {
     routerItem: {
