@@ -50,7 +50,8 @@ const routes = [
     meta: {
       title: "首页",
       hidden: true,
-      language: "home"
+      language: "home",
+      icon: "HomeOutlined"
     },
     component: () => import("../views/layout/layout.vue"),
   },
@@ -60,7 +61,8 @@ const routes = [
     meta: {
       title: "管理总台",
       hidden: true,
-      language: "management_desk"
+      language: "management_desk",
+      icon: "DashboardOutlined"
     },
     component: () => import("../views/layout/layout.vue"),
     children: [{
@@ -83,8 +85,104 @@ const routes = [
       },
       component: () => import("../views/admin/user.vue")
     },
+    {
+      path: "/menu",
+      name: "Menu",
+      meta: {
+        title: "菜单管理",
+        hidden: true,
+        language: "menu_management"
+      },
+      component: () => import("../views/admin/menu.vue")
+    },
     ]
   },
+  {
+    path: "/message",
+    name: "Message",
+    meta: {
+      title: "信息管理",
+      hidden: true,
+      language: "message_desk",
+      icon: "ContainerOutlined"
+    },
+    component: () => import("../views/layout/layout.vue"),
+    children: [{
+      path: "/message_list",
+      name: "MessageList",
+      meta: {
+        title: "信息列表",
+        hidden: true,
+        language: "message_list"
+      },
+      component: () => import("../views/message/list.vue")
+    },
+    {
+      path: "/message_category",
+      name: "MessageCategory",
+      meta: {
+        title: "信息分类",
+        hidden: true,
+        language: "message_category"
+      },
+      component: () => import("../views/message/categroy.vue")
+    },
+    ]
+  },
+  {
+    path: "/product",
+    name: "Product",
+    meta: {
+      title: "产品管理",
+      hidden: true,
+      language: "product_desk",
+      icon: "CodeSandboxOutlined"
+    },
+    component: () => import("../views/layout/layout.vue"),
+    children: [{
+      path: "/product_list",
+      name: "ProductList",
+      meta: {
+        title: "产品列表",
+        hidden: true,
+        language: "product_list"
+      },
+      component: () => import("../views/product/list.vue")
+    },
+    {
+      path: "/product_category",
+      name: "ProductCategory",
+      meta: {
+        title: "产品分类",
+        hidden: true,
+        language: "product_category"
+      },
+      component: () => import("../views/product/categroy.vue")
+    },
+    ]
+  },
+  {
+    path: "/member",
+    name: "Member",
+    meta: {
+      title: "会员管理",
+      hidden: true,
+      language: "member_desk",
+      icon: "UserOutlined"
+    },
+    component: () => import("../views/layout/layout.vue"),
+    children: [{
+      path: "/member_list",
+      name: "MemberList",
+      meta: {
+        title: "会员列表",
+        hidden: true,
+        language: "member_list"
+      },
+      component: () => import("../views/member/list.vue")
+    },
+    ]
+  }
 ];
 
 const router = createRouter({

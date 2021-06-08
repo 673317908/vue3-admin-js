@@ -22,6 +22,15 @@ module.exports = {
     home: "首页",
     management_desk: "管理总台",
     role_management: "角色管理",
-    user_management: "用户管理"
+    user_management: "用户管理",
+    menu_management: "菜单管理",
+    message_desk: "信息管理",
+    message_list: "信息列表",
+    message_category: "信息类别",
+    product_desk: "产品管理",
+    product_list: "产品列表",
+    product_category: "产品类别",
+    member_desk: "会员管理",
+    member_list: "会员列表"
   }
 }

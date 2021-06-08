@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
+  <div class="container" :class="{ 'sign-up-mode': signUpMode }">
     <!-- form表单容器 -->
     <div class="forms-container">
       <div class="signin-signup">
         <!-- 登录 -->
-        <LoginForm />
+        <LoginForm @signUpModeActive="signUpModeActive" />
 
         <!-- 注册 -->
-        <!-- <RegisterForm /> -->
+        <RegisterForm @signUpModeActive="signUpModeActive" />
       </div>
     </div>
     <!-- 左右切换动画 -->
@@ -22,17 +22,28 @@
     </div>
   </div>
 </template>
-
 <script>
+import { reactive, toRefs } from "vue";
 import LoginForm from "./login";
+import RegisterForm from "./register";
 export default {
-  components: {
-    LoginForm,
+  name: "LoginRegister",
+  components: { LoginForm, RegisterForm },
+  setup() {
+    const data = reactive({
+      signUpMode: false,
+    });
+    const signUpModeActive = () => {
+      data.signUpMode = !data.signUpMode;
+    };
+    return {
+      signUpModeActive,
+      ...toRefs(data),
+    };
   },
 };
 </script>
-
-<style scoped lang="scss">
+<style scoped>
 .container {
   position: relative;
   width: 100%;
@@ -51,7 +62,7 @@ export default {
 
 .signin-signup {
   position: absolute;
-  top: 50%;
+  top: 43%;
   transform: translate(-50%, -50%);
   left: 75%;
   width: 44%;
@@ -125,8 +136,8 @@ export default {
   position: absolute;
   height: 2000px;
   width: 2000px;
-  top: -5%;
-  right: 45%;
+  top: -10%;
+  right: 48%;
   transform: translateY(-50%);
   background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
   transition: 1.8s ease-in-out;
@@ -151,7 +162,7 @@ export default {
 
 .left-panel {
   pointer-events: all;
-  padding: 12rem 17% 2rem 12%;
+  padding: 3rem 17% 2rem 12%;
 }
 
 .right-panel {
@@ -229,4 +240,26 @@ export default {
 .container.sign-up-mode .right-panel {
   pointer-events: all;
 }
-</style>
+
+/* 控制login & register显示 */
+form {
+  padding: 0rem 5rem;
+  transition: all 0.2s 0.7s;
+  overflow: hidden;
+}
+
+form.sign-in-form {
+  z-index: 2;
+}
+
+form.sign-up-form {
+  opacity: 0;
+  z-index: 1;
+}
+
+/* register */
+
+.submit_btn {
+  width: 100%;
+}
+</style>>

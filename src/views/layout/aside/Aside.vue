@@ -6,21 +6,22 @@
       mode="inline"
       theme="dark"
       :inline-collapsed="data.collapsed"
+      @click="selectedMenu"
+      @openChange="openChange"
     >
       <template v-for="item in routers">
         <!-- 无子菜单 -->
-        <template v-if="!item.children">
-          <router-link :to="item.path" :key="item.path">
-            <a-menu-item v-if="item.meta.hidden">
+        <template v-if="item.meta.hidden">
+          <a-menu-item v-if="!item.children" :key="item.path">
+            <router-link :to="item.path">
+              <component :is="item.meta.icon" />
               <span>{{
                 $t(`aside_menu.${item.meta && item.meta.language}`)
               }}</span>
-            </a-menu-item>
-          </router-link>
-        </template>
-        <!-- 有子菜单 -->
-        <template v-else>
-          <Menu :routerItem="item" :key="item.path" />
+            </router-link>
+          </a-menu-item>
+          <!-- 有子菜单 -->
+          <Menu v-else :routerItem="item" :key="item.path" />
         </template>
       </template>
     </a-menu>
@@ -28,39 +29,31 @@
 </template>
 
 <script>
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PieChartOutlined,
-  MailOutlined,
-  DesktopOutlined,
-  InboxOutlined,
-  AppstoreOutlined,
-} from "@ant-design/icons-vue";
+import { HomeOutlined } from "@ant-design/icons-vue";
 import { reactive } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import Menu from "./component/menu";
 export default {
   components: {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    PieChartOutlined,
-    MailOutlined,
-    DesktopOutlined,
-    InboxOutlined,
-    AppstoreOutlined,
     Menu,
+    HomeOutlined,
   },
   setup() {
     const { options } = useRouter();
     const routers = options.routes;
     const data = reactive({
-      selectedKeys: ["1"],
-      openKeys: ["sub1"],
-      preOpenKeys: ["sub1"],
+      selectedKeys: [],
+      openKeys: [],
+      preOpenKeys: [],
       collapsed: false,
     });
-    return { data, routers };
+    const selectedMenu = ({ item, key, keyPath }) => {
+      data.selectedKeys = [key];
+    };
+    const openChange = (openKeys) => {
+      data.openKeys = openKeys;
+    };
+    return { data, routers, openChange, selectedMenu };
   },
 };
 </script>

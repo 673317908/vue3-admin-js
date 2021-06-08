@@ -74,7 +74,7 @@ export default {
   margin: 20px 0 !important;
 }
 .nc-container #nc_1_wrapper {
-  // width: auto !important;
+  width: auto !important;
 }
 .nc-container .nc_scale span {
   height: auto !important;

@@ -54,7 +54,7 @@ export default {
   },
   setup() {
     const LayoutData = reactive({
-      collapsed: true,
+      collapsed: false,
     });
     const data = toRefs(LayoutData);
     return {

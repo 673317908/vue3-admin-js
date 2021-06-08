@@ -10,7 +10,7 @@ export function ValidateUserName(value) {
  * 密码验证 
  */
 export function ValidatePassword(value) {
-    let regPass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;
+    let regPass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
     return regPass.test(value)
 }
 
