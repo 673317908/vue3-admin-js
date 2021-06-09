@@ -7,36 +7,27 @@
     @finish="handleFinish"
     v-bind="layout"
     labelAlign="right"
-    class="loginForm sign-in-form"
+    class="loginForm"
   >
-    <a-form-item
-      required
-      name="username"
-      :label="$t('account.user_name')"
-    >
+    <!-- class="loginForm sign-in-form" -->
+    <a-form-item style="justify-content:center;" required name="username">
+      <label>{{ $t("account.user_name") }}</label>
       <a-input
         v-model:value="register_form.username"
         type="text"
         :placeholder="$t('account.user_name_placeholder')"
       />
     </a-form-item>
-    <a-form-item
-      required
-      name="password"
-      :label="$t('account.password')"
-    >
+    <a-form-item style="justify-content:center;" required name="password">
+      <label>{{ $t("account.password") }}</label>
       <a-input
         v-model:value="register_form.password"
         type="password"
         :placeholder="$t('account.password_placeholder')"
       />
     </a-form-item>
-    <a-form-item
-      style=""
-      required
-      name="code"
-      :label="$t('account.verification_code')"
-    >
+    <a-form-item style="justify-content:center;" required name="code">
+      <label>{{ $t("account.verification_code") }}</label>
       <a-row :gutter="16">
         <a-col :span="12">
           <a-input
@@ -49,10 +40,10 @@
         </a-col>
       </a-row>
     </a-form-item>
-    <!-- <a-form-item style="justify-content: center">
+    <a-form-item style="justify-content:center;">
       <Captcha />
-    </a-form-item> -->
-    <a-form-item style="justify-content: center;">
+    </a-form-item>
+    <a-form-item style="justify-content:center;">
       <a-button type="primary" html-type="submit" block>{{
         $t("account.login")
       }}</a-button>
@@ -160,10 +151,8 @@ export default {
 // @import "./login.scss";
 /* form */
 .loginForm {
-  margin-top: 20px;
-  background-color: #fff;
-  padding: 20px 40px 20px 20px;
-  border-radius: 5px;
-  box-shadow: 0px 5px 10px #cccc;
+  width: 500px;
+  margin: 10% auto 0 auto;
+  padding-left: 25px;
 }
 </style>
