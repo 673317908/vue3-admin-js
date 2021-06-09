@@ -5,16 +5,6 @@ import {
 
 const routes = [
   {
-    path: "/account",
-    name: "Account",
-    meta: {
-      title: "账户",
-      hidden: false,
-      language: "account"
-    },
-    component: () => import("../views/acount/index.vue")
-  },
-  {
     path: "/login",
     name: "Login",
     meta: {

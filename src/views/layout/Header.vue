@@ -38,13 +38,15 @@
 
 <script>
 import { DownOutlined } from "@ant-design/icons-vue";
-import { reactive, toRefs } from "vue";
+import { onMounted, reactive, toRefs } from "vue";
 import { useI18n } from "vue-i18n";
+import { useStore } from "vuex";
 export default {
   components: {
     DownOutlined,
   },
   setup() {
+    const store = useStore();
     const { locale } = useI18n({ useScope: "global" });
     const languageData = reactive({
       language: [
@@ -57,13 +59,17 @@ export default {
           value: "en",
         },
       ],
-      languageCss: "ch",
+      languageCss: store.state.layout.language,
     });
     const lang = toRefs(languageData);
     const cutLanguage = (item) => {
       locale.value = item.value;
       languageData.languageCss = item.value;
+      store.commit("layout/SET_LANGUAGE", item.value);
     };
+    onMounted(() => {
+      locale.value = store.state.layout.language;
+    });
     return {
       ...lang,
       cutLanguage,

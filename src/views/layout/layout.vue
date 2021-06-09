@@ -1,7 +1,11 @@
 <template>
   <div class="layout">
     <a-layout id="components-layout-demo-custom-trigger">
-      <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+      <a-layout-sider
+        v-model:collapsed="collapsedStatus"
+        :trigger="null"
+        collapsible
+      >
         <div class="logo" />
         <Aside />
       </a-layout-sider>
@@ -11,13 +15,9 @@
           <menu-unfold-outlined
             v-if="collapsed"
             class="trigger"
-            @click="() => (collapsed = !collapsed)"
+            @click="activeCollapsed"
           />
-          <menu-fold-outlined
-            v-else
-            class="trigger"
-            @click="() => (collapsed = !collapsed)"
-          />
+          <menu-fold-outlined v-else class="trigger" @click="activeCollapsed" />
         </a-layout-header>
         <Breadcrumb />
         <a-layout-content
@@ -40,8 +40,9 @@ import Aside from "./aside/Aside";
 import Heade from "./Header";
 import Main from "./Main";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
-import { reactive, toRefs } from "vue";
+import { computed, reactive, toRefs } from "vue";
 import Breadcrumb from "../../components/breadcrumb/index";
+import { useStore } from "vuex";
 export default {
   name: "layout",
   components: {
@@ -53,18 +54,34 @@ export default {
     Breadcrumb,
   },
   setup() {
+    const store = useStore();
     const LayoutData = reactive({
-      collapsed: false,
+      collapsed: store.state.layout.collapsedStatus,
     });
+    const activeCollapsed = () => {
+      LayoutData.collapsed = !LayoutData.collapsed;
+      store.commit("layout/SET_COLLAPSED", LayoutData.collapsed);
+    };
     const data = toRefs(LayoutData);
+    const collapsedStatus = computed(() => {
+      return store.state.layout.collapsedStatus;
+    });
     return {
       ...data,
+      activeCollapsed,
+      collapsedStatus,
     };
   },
 };
 </script>
 
 <style lang="scss">
+.ant-layout-sider {
+  flex: 0 0 260px;
+  max-width: 260px;
+  min-width: 260px;
+  width: 260px;
+}
 .ant-layout.ant-layout-has-sider {
   height: 100vh !important;
 }

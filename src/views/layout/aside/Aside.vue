@@ -33,25 +33,28 @@ import { HomeOutlined } from "@ant-design/icons-vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import Menu from "./component/menu";
+import { useStore } from "vuex";
 export default {
   components: {
     Menu,
     HomeOutlined,
   },
   setup() {
+    const store = useStore();
     const { options } = useRouter();
     const routers = options.routes;
     const data = reactive({
-      selectedKeys: [],
-      openKeys: [],
-      preOpenKeys: [],
+      selectedKeys: store.state.layout.selectedKeys,
+      openKeys: store.state.layout.openKeys,
       collapsed: false,
     });
     const selectedMenu = ({ item, key, keyPath }) => {
       data.selectedKeys = [key];
+      store.commit("layout/SET_SELECTED_KEYS", data.selectedKeys);
     };
     const openChange = (openKeys) => {
       data.openKeys = openKeys;
+      store.commit("layout/SET_OPEN_KEYS", data.openKeys);
     };
     return { data, routers, openChange, selectedMenu };
   },
