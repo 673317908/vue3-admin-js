@@ -3,7 +3,7 @@
     <a-menu mode="inline" theme="dark">
       <a-sub-menu>
         <template #title>
-          <component :is="routerItem.meta.icon" />
+          <component :is="proxy.$antIcons[routerItem.meta.icon]" />
           <span class="anticon">{{
             $t(`aside_menu.${routerItem.meta && routerItem.meta.language}`)
           }}</span>
@@ -26,23 +26,10 @@
 </template>
 
 <script>
-import { onMounted, reactive } from "vue";
-import {
-  DashboardOutlined,
-  ContainerOutlined,
-  CodeSandboxOutlined,
-  UserOutlined,
-  AppstoreOutlined,
-} from "@ant-design/icons-vue";
+import { getCurrentInstance, onMounted, reactive } from "vue";
 export default {
   name: "Menu",
-  components: {
-    DashboardOutlined,
-    ContainerOutlined,
-    CodeSandboxOutlined,
-    UserOutlined,
-    AppstoreOutlined,
-  },
+  components: {},
   props: {
     routerItem: {
       type: Object,
@@ -53,9 +40,11 @@ export default {
     const data = reactive({
       routerItem: props.routerItem,
     });
+    const { proxy } = getCurrentInstance();
     onMounted(() => {});
     return {
       ...data,
+      proxy,
     };
   },
 };
