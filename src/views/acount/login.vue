@@ -1,65 +1,74 @@
 <template>
-  <a-form
-    name="custom-validation"
-    ref="ruleForm"
-    :model="register_form"
-    :rules="rulesForm"
-    @finish="handleFinish"
-    v-bind="layout"
-    labelAlign="right"
-    class="loginForm"
-  >
-    <!-- class="loginForm sign-in-form" -->
-    <a-form-item style="justify-content:center;" required name="username">
-      <label>{{ $t("account.user_name") }}</label>
-      <a-input
-        v-model:value="register_form.username"
-        type="text"
-        :placeholder="$t('account.user_name_placeholder')"
-      />
-    </a-form-item>
-    <a-form-item style="justify-content:center;" required name="password">
-      <label>{{ $t("account.password") }}</label>
-      <a-input
-        v-model:value="register_form.password"
-        type="password"
-        :placeholder="$t('account.password_placeholder')"
-      />
-    </a-form-item>
-    <a-form-item style="justify-content:center;" required name="code">
-      <label>{{ $t("account.verification_code") }}</label>
-      <a-row :gutter="16">
-        <a-col :span="12">
-          <a-input
-            v-model:value="register_form.code"
-            maxlength="6"
-            :placeholder="$t('account.verification_code_placeholder')"
-        /></a-col>
-        <a-col :span="12">
-          <a-button type="danger" block>{{ $t("account.get_code") }}</a-button>
-        </a-col>
-      </a-row>
-    </a-form-item>
-    <a-form-item style="justify-content:center;">
-      <Captcha />
-    </a-form-item>
-    <a-form-item style="justify-content:center;">
-      <a-button type="primary" html-type="submit" block>{{
-        $t("account.login")
-      }}</a-button>
-    </a-form-item>
-    <div class="fs_12" style="margin: 40px 0 0; color: #eee; text-align: right">
-      <TranslationOutlined
-        style="color: #ccc; font-size: 24px; margin-right: 15px"
-        @click="activeLanguage"
-      />
-      <span class="color_gray">{{ $t("account.forget") }}</span>
-      <span style="margin: 0 10px" class="color_gray">|</span>
-      <span @click="register" class="color_gray">{{
-        $t("account.register")
-      }}</span>
-    </div>
-  </a-form>
+  <div class="account">
+    <a-form
+      name="custom-validation"
+      ref="ruleForm"
+      :model="register_form"
+      :rules="rulesForm"
+      @finish="handleFinish"
+      v-bind="layout"
+      class="form_warp"
+      :wrapperCol="layout.wrapperCol"
+    >
+      <!-- class="loginForm sign-in-form" -->
+      <a-form-item required name="username">
+        <label>{{ $t("account.user_name") }}</label>
+        <a-input
+          v-model:value="register_form.username"
+          type="text"
+          :placeholder="$t('account.user_name_placeholder')"
+        />
+      </a-form-item>
+      <a-form-item required name="password">
+        <label>{{ $t("account.password") }}</label>
+        <a-input
+          v-model:value="register_form.password"
+          type="password"
+          :placeholder="$t('account.password_placeholder')"
+        />
+      </a-form-item>
+      <a-form-item required name="code">
+        <label>{{ $t("account.verification_code") }}</label>
+        <a-row :gutter="16">
+          <a-col :span="12">
+            <a-input
+              v-model:value="register_form.code"
+              maxlength="6"
+              :placeholder="$t('account.verification_code_placeholder')"
+          /></a-col>
+          <a-col :span="12">
+            <a-button type="danger" block>{{
+              $t("account.get_code")
+            }}</a-button>
+          </a-col>
+        </a-row>
+      </a-form-item>
+      <a-form-item>
+        <Captcha />
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" html-type="submit" block>{{
+          $t("account.login")
+        }}</a-button>
+      </a-form-item>
+      <div
+        class="fs_12"
+        style="margin: 40px 0 0; color: #eee; text-align: right"
+      >
+        <TranslationOutlined
+          style="color: #ccc; font-size: 24px; margin-right: 15px"
+          @click="activeLanguage"
+        />
+        <router-link to="./forget">
+          <span class="color_gray">{{ $t("account.forget") }}</span>
+        </router-link>
+        <span style="margin: 0 10px" class="color_gray">|</span>
+        <router-link to="./register">
+          <span class="color_gray">{{ $t("account.register") }}</span>
+        </router-link>
+      </div>
+    </a-form>
+  </div>
 </template>
 
 <script>
@@ -108,8 +117,7 @@ export default {
     };
     const layoutConfig = reactive({
       layout: {
-        labelCol: { span: 8 },
-        wrapperCol: { span: 12 },
+        wrapperCol: { span: 24 },
       },
       register_form: {
         username: "",
@@ -123,9 +131,6 @@ export default {
       },
     });
     const data = toRefs(layoutConfig);
-    const register = () => {
-      emit("signUpModeActive");
-    };
     const { locale } = useI18n({ useScope: "global" });
     const activeLanguage = () => {
       if (locale.value == "ch") {
@@ -140,7 +145,6 @@ export default {
     return {
       ...data,
       handleFinish,
-      register,
       activeLanguage,
     };
   },
@@ -148,11 +152,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// @import "./login.scss";
-/* form */
-.loginForm {
-  width: 500px;
-  margin: 10% auto 0 auto;
-  padding-left: 25px;
-}
+@import "./login.scss";
 </style>

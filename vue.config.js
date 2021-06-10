@@ -10,5 +10,13 @@ module.exports = {
                 prependData: `@import "./src/styles/main.scss";`
             },
         }
+    },
+    devServer: {
+        proxy: {
+            "/api": {
+                target: "http://account.web-jshtml.cn/api/v1",
+                changeOrigin: true
+            }
+        }
     }
 }

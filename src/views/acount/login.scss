@@ -1,13 +1,13 @@
 .account {
-  margin-top: 20px;
-  background-color: #fff;
+  height: 100vh;
+  background-color: #1e1e1e;
   padding: 20px 0px 20px 20px;
-  border-radius: 5px;
-  box-shadow: 0px 5px 10px #cccc;
-  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .form_warp {
-    width: 460px;
+    width: 365px;
     margin: 0 auto;
 
     label {
@@ -15,10 +15,6 @@
       font-size: 14px;
       display: block;
     }
-
-    // .text_center {
-    //     text-align: center;
-    // }
 
     .fs_12 {
       font-size: 12px;

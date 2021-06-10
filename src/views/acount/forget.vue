@@ -11,15 +11,15 @@
       >
         <a-form-item required name="username">
           <label>用户名</label>
-          <a-input v-model:value="register_form.username" type="text" />
+          <a-input v-model:value="register_form.username" type="text" placeholder="" />
         </a-form-item>
         <a-form-item required name="password">
           <label>密码</label>
-          <a-input v-model:value="register_form.password" type="password" />
+          <a-input v-model:value="register_form.password" type="password" placeholder="" />
         </a-form-item>
         <a-form-item required name="passwords">
           <label>确认密码</label>
-          <a-input v-model:value="register_form.passwords" type="password" />
+          <a-input v-model:value="register_form.passwords" type="password" placeholder="" />
         </a-form-item>
         <a-form-item required name="code">
           <label>验证码</label>
@@ -47,7 +47,7 @@
           <a-button type="primary" html-type="submit" block>重置密码</a-button>
         </a-form-item>
       </a-form>
-      <div class="fs_12" style="margin:20px 0;">
+      <div class="fs_12" style="margin:20px 0;text-align:right;">
         <router-link to="/login" class="color_white">登录</router-link>
         <span style="margin:0 10px;" class="color_white">|</span>
         <router-link to="/register" class="color_white">注册</router-link>
@@ -104,8 +104,7 @@ export default {
     };
     const layoutConfig = reactive({
       layout: {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 14 },
+        wrapperCol: { span: 24 },
       },
       register_form: {
         username: "",
