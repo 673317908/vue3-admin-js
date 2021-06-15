@@ -11,15 +11,27 @@
       >
         <a-form-item required name="username">
           <label>用户名</label>
-          <a-input v-model:value="register_form.username" type="text" placeholder="" />
+          <a-input
+            v-model:value="register_form.username"
+            type="text"
+            :placeholder="$t('account.user_name_placeholder')"
+          />
         </a-form-item>
         <a-form-item required name="password">
           <label>密码</label>
-          <a-input v-model:value="register_form.password" type="password" placeholder="" />
+          <a-input
+            v-model:value="register_form.password"
+            type="password"
+            :placeholder="$t('account.password_placeholder')"
+          />
         </a-form-item>
         <a-form-item required name="passwords">
           <label>确认密码</label>
-          <a-input v-model:value="register_form.passwords" type="password" placeholder="" />
+          <a-input
+            v-model:value="register_form.passwords"
+            type="password"
+            :placeholder="$t('account.confirm_password')"
+          />
         </a-form-item>
         <a-form-item required name="code">
           <label>验证码</label>
@@ -47,9 +59,9 @@
           <a-button type="primary" html-type="submit" block>重置密码</a-button>
         </a-form-item>
       </a-form>
-      <div class="fs_12" style="margin:20px 0;text-align:right;">
+      <div class="fs_12" style="margin: 20px 0; text-align: right">
         <router-link to="/login" class="color_white">登录</router-link>
-        <span style="margin:0 10px;" class="color_white">|</span>
+        <span style="margin: 0 10px" class="color_white">|</span>
         <router-link to="/register" class="color_white">注册</router-link>
       </div>
     </div>
@@ -59,7 +71,11 @@
 <script>
 import { reactive, onMounted, toRefs } from "vue";
 import Captcha from "../../components/Captcha/index";
-import { ValidateUserName, ValidatePassword, ValidateCode } from "../../utils/check";
+import {
+  ValidateUserName,
+  ValidatePassword,
+  ValidateCode,
+} from "../../utils/check";
 import { message } from "ant-design-vue";
 export default {
   components: {

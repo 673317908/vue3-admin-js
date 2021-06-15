@@ -28,7 +28,11 @@
       </a-form-item>
       <a-form-item required name="passwords">
         <label>{{ $t("account.confirm_password") }}</label>
-        <a-input v-model:value="register_form.passwords" type="password" />
+        <a-input
+          v-model:value="register_form.passwords"
+          type="password"
+          :placeholder="$t('account.confirm_password')"
+        />
       </a-form-item>
       <a-form-item required name="code">
         <label>{{ $t("account.verification_code") }}</label>
@@ -82,6 +86,7 @@ import {
   ValidateCode,
 } from "../../utils/check";
 import { message } from "ant-design-vue";
+import { sendCode } from "../../api/account";
 export default {
   components: {
     Captcha,
@@ -158,6 +163,12 @@ export default {
       if (btn.timeId) {
         clearInterval(btn.timeId);
       }
+      sendCode({
+        type: "Register",
+        username: layoutConfig.register_form.username,
+      }).then((res) => {
+        console.log(res);
+      });
       btn.btnText = "发送中";
       btn.btnLoading = true;
       btn.timeId = setInterval(() => {
@@ -172,18 +183,16 @@ export default {
         }
       }, 1000);
     };
-    const login = () => {
-      emit("signUpModeActive");
-    };
     // 提交
-    const handleFinish = () => {};
+    const handleFinish = () => {
+      console.log(layoutConfig.register_form);
+    };
     onMounted(() => {});
     return {
       ...data,
       ...btnData,
       handleFinish,
       getCode,
-      login,
     };
   },
 };
